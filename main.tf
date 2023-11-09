@@ -10,6 +10,7 @@ resource "aws_iam_policy" "policy" {
         "Sid": "VisualEditor0",
         "Effect": "Allow",
         "Action": [
+          "ssm:DescribeParameter",
           "ssm:GetParameterHistory",
           "ssm:GetParametersByPath",
           "ssm:GetParameters",
@@ -75,7 +76,7 @@ resource "aws_security_group" "sg" {
 
 ## EC2 Intsance
 resource "aws_instance" "instance" {
-  ami           = data.aws_ami.example.id
+  ami           = data.aws_ami.ami.id
   instance_type = "t3.micro"
   vpc_security_group_ids = [aws_security_group.sg.id]
   iam_instance_profile = aws_iam_instance_profile.instance_profile.name
